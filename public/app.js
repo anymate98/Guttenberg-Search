@@ -28,12 +28,14 @@ const vm = new Vue ({
     },
     /** Call API to search for inputted term */
     async search () {
+      console.log('Search')
       const response = await axios.get(`${this.baseUrl}/search`, { params: { term: this.searchTerm, offset: this.searchOffset } })
       this.numHits = response.data.hits.total.value
       return response.data.hits.hits
     },
     /** Get next page of search results */
     async nextResultsPage () {
+      console.log('Next Results Page')
       if (this.numHits > 10) {
         this.searchOffset += 10
         if (this.searchOffset + 10 > this.numHits) { this.searchOffset = this.numHits - 10}
@@ -43,6 +45,7 @@ const vm = new Vue ({
     },
     /** Get previous page of search results */
     async prevResultsPage () {
+      console.log('Prev Results Page')
       this.searchOffset -= 10
       if (this.searchOffset < 0) { this.searchOffset = 0 }
       this.searchResults = await this.search()
@@ -50,6 +53,7 @@ const vm = new Vue ({
     },
     /** Call the API to get current page of paragraphs */
     async getParagraphs (bookTitle, offset) {
+      console.log('Get Paragraphs')
       try {
         this.bookOffset = offset
         const start = this.bookOffset
@@ -62,16 +66,19 @@ const vm = new Vue ({
     },
     /** Get next page (next 10 paragraphs) of selected book */
     async nextBookPage () {
+      console.log('Next Book Page')
       this.$refs.bookModal.scrollTop = 0
       this.paragraphs = await this.getParagraphs(this.selectedParagraph._source.title, this.bookOffset + 10)
     },
     /** Get previous page (previous 10 paragraphs) of selected book */
     async prevBookPage () {
+      console.log('Prev Book Page')
       this.$refs.bookModal.scrollTop = 0
       this.paragraphs = await this.getParagraphs(this.selectedParagraph._source.title, this.bookOffset - 10)
     },
     /** Display paragraphs from selected book in modal window */
     async showBookModal (searchHit) {
+      console.log('Show Book Modal')
       try {
         document.body.style.overflow = 'hidden'
         this.selectedParagraph = searchHit
@@ -82,6 +89,7 @@ const vm = new Vue ({
     },
     /** Close the book detail modal */
     closeBookModal () {
+      console.log('Close Book Modal')
       document.body.style.overflow = 'auto'
       this.selectedParagraph = null
     }

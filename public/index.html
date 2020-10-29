@@ -24,19 +24,19 @@
     <!-- Search Metadata Card -->
     <div class="mui-panel">
       <div class="mui--text-headline">{{ numHits }} Hits</div>
-      <div class="mui--text-subhead">Displaying Results {{ searchOffset }} - {{ searchOffset + 9 }}</div>
+<!--      <div class="mui&#45;&#45;text-subhead">Displaying Results {{ searchOffset }} - {{ searchOffset + 9 }}</div>-->
     </div>
 
     <!-- Top Pagination Card -->
-    <div class="mui-panel pagination-panel">
-        <button class="mui-btn mui-btn--flat" v-on:click="prevResultsPage()">Prev Page</button>
-        <button class="mui-btn mui-btn--flat" v-on:click="nextResultsPage()">Next Page</button>
-    </div>
+<!--    <div class="mui-panel pagination-panel">-->
+<!--        <button class="mui-btn mui-btn&#45;&#45;flat" v-on:click="prevResultsPage()">Prev Page</button>-->
+<!--        <button class="mui-btn mui-btn&#45;&#45;flat" v-on:click="nextResultsPage()">Next Page</button>-->
+<!--    </div>-->
 
     <!-- Search Results Card List -->
     <div class="search-results" ref="searchResults">
       <div class="mui-panel" v-for="hit in searchResults" v-on:click="showBookModal(hit)">
-        <div class="mui--text-title" v-html="hit.highlight.text[0]"></div>
+        <div class="mui--text-title" v-html="hit._source.text"></div>
         <div class="mui-divider"></div>
         <div class="mui--text-subhead">{{ hit._source.title }} - {{ hit._source.author }}</div>
         <div class="mui--text-body2">Location {{ hit._source.location }}</div>
@@ -44,10 +44,10 @@
     </div>
 
     <!-- Bottom Pagination Card -->
-    <div class="mui-panel pagination-panel">
-        <button class="mui-btn mui-btn--flat" v-on:click="prevResultsPage()">Prev Page</button>
-        <button class="mui-btn mui-btn--flat" v-on:click="nextResultsPage()">Next Page</button>
-    </div>
+<!--    <div class="mui-panel pagination-panel">-->
+<!--        <button class="mui-btn mui-btn&#45;&#45;flat" v-on:click="prevResultsPage()">Prev Page</button>-->
+<!--        <button class="mui-btn mui-btn&#45;&#45;flat" v-on:click="nextResultsPage()">Next Page</button>-->
+<!--    </div>-->
 
     <!-- Book Paragraphs Modal Window -->
     <div v-if="selectedParagraph" ref="bookModal" class="book-modal">
