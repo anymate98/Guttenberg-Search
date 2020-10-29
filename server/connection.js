@@ -3,7 +3,7 @@ const elasticsearch = require('elasticsearch')
 // Core ES variables for this project
 const index = 'library'
 const type = 'book'
-const port = 9200
+const port = 8080
 const host = process.env.ES_HOST || 'localhost'
 const client = new elasticsearch.Client({ host: { host, port } })
 
@@ -28,7 +28,6 @@ async function resetIndex () {
     await client.indices.delete({ index })
   }
 
-  await client.indices.create({ index })
   await putBookMapping()
 }
 
@@ -41,7 +40,7 @@ async function putBookMapping () {
     text: { type: 'text' }
   }
 
-  return client.indices.putMapping({ index, type, body: { properties: schema } })
+  return client.indices.create({ index, body: { mappings: { properties: schema }, settings: { "number_of_shards": 3 } } })
 }
 
 module.exports = {

@@ -33,12 +33,12 @@ app.use(async (ctx, next) => {
  * offset: positive integer
  */
 router.get('/search',
-  validate({
-    query: {
-      term: joi.string().max(60).required(),
-      offset: joi.number().integer().min(0).default(0)
-    }
-  }),
+  // validate({
+  //   query: {
+  //     term: joi.string().max(60).required(),
+  //     offset: joi.number().integer().min(0).default(0)
+  //   }
+  // }),
   async (ctx, next) => {
     const { term, offset } = ctx.request.query
     ctx.body = await search.queryTerm(term, offset)
@@ -54,13 +54,13 @@ router.get('/search',
  * end: positive integer greater than start
  */
 router.get('/paragraphs',
-  validate({
-    query: {
-      bookTitle: joi.string().max(256).required(),
-      start: joi.number().integer().min(0).default(0),
-      end: joi.number().integer().greater(joi.ref('start')).default(10)
-    }
-  }),
+  // validate({
+  //   query: {
+  //     bookTitle: joi.string().max(256).required(),
+  //     start: joi.number().integer().min(0).default(0),
+  //     end: joi.number().integer().greater(joi.ref('start')).default(10)
+  //   }
+  // }),
   async (ctx, next) => {
     const { bookTitle, start, end } = ctx.request.query
     ctx.body = await search.getParagraphs(bookTitle, start, end)

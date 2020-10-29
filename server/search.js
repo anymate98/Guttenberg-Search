@@ -4,14 +4,11 @@ module.exports = {
   /** Query ES index for the provided term */
   queryTerm (term, offset = 0) {
     const body = {
-      from: offset,
+      // from: offset,
       query: { match: {
-        text: {
-          query: term,
-          operator: 'and',
-          fuzziness: 'auto'
-        } } },
-      highlight: { fields: { text: {} } }
+        text: term
+      } },
+      // highlight: { fields: { text: {} } }
     }
 
     return client.search({ index, type, body })
@@ -25,8 +22,8 @@ module.exports = {
     ]
 
     const body = {
-      size: endLocation - startLocation,
-      sort: { location: 'asc' },
+      // size: endLocation - startLocation,
+      // sort: { location: 'asc' },
       query: { bool: { filter } }
     }
 
