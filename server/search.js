@@ -8,7 +8,7 @@ module.exports = {
       query: { match: {
         text: term
       } },
-      // highlight: { fields: { text: {} } }
+      highlight: { fields: { text: {} } }
     }
 
     return client.search({ index, type, body })
